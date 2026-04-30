@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coverpage Generator</title>
+    <link href="style.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js" type="module" defer></script>
+</head>
+
+<body>
+    <div class="app-layout">
+
+        <aside class="sidebar">
+            <h2 class="app-title">Coverpage Generator</h2>
+
+            <div class="form-section">
+                <h3>Assignment Details</h3>
+                <div class="input-group">
+                    <label>Assignment Title</label>
+                    <input name="assignment-title" value="" type="text">
+                </div>
+                <div class="input-group">
+                    <label>Assignment Number</label>
+                    <input name="assignment-num" value="02" type="text">
+                </div>
+                <div class="input-group">
+                    <label>Course Title</label>
+                    <input name="course-title" value="ADA" type="text">
+                </div>
+                <div class="input-group">
+                    <label>Course Code</label>
+                    <input name="course-code" value="CSE-232" type="text">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Teacher Info</h3>
+                <div class="input-group">
+                    <label>Teacher Name</label>
+                    <input name="teacher-name" value="Anas pir" type="text">
+                </div>
+                <div class="input-group">
+                    <label>Designation</label>
+                    <input name="designation" value="Lecturer" type="text">
+                </div>
+                <div class="input-group">
+                    <label>Department</label>
+                    <input name="teacher-dept" value="CSE" type="text">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Student Info</h3>
+                <div class="input-group">
+                    <label>Student Name</label>
+                    <input name="student-name" value="Tahzib Ebad Chowdhury" type="text">
+                </div>
+                <div class="input-group">
+                    <label>Student ID</label>
+                    <input name="id" value="151-115-084" type="text">
+                </div>
+                <div class="input-group">
+                    <label>Batch</label>
+                    <input name="batch" value="CSE 62" type="text">
+                </div>
+                <div class="input-group">
+                    <label>Section</label>
+                    <input name="section" value="B" type="text">
+                </div>
+                <div class="input-group">
+                    <label>Department</label>
+                    <input name="student-dept" value="Computer Science & Engineering" type="text">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Submission</h3>
+                <div class="input-group">
+                    <label>Date</label>
+                    <input name="submission-date" value="01/02/2026" type="text">
+                </div>
+            </div>
+
+            <button class="generate">Generate PDF</button>
+        </aside>
+
+        <main class="preview-area">
+            <div class="coverpage">
+                <img src="img/logo.png" alt="metropolitan university logo png">
+
+                <section class="header">
+                    <div class="data-container title-container">
+                        <h2 class="data assignment-title"></h2>
+                    </div>
+                    <div class="data-container">
+                        <b>Assignment Number: </b>
+                        <span class="data assignment-num">02</span>
+                    </div>
+                    <div class="data-container">
+                        <b>Course Title: </b>
+                        <span class="data course-title">ADA</span>
+                    </div>
+                    <div class="data-container">
+                        <b>Course Code: </b>
+                        <span class="data course-code">CSE-232</span>
+                    </div>
+                </section>
+
+                <section class="submitted-to">
+                    <div class="data-container">
+                        <h3 class="bold">Submitted to</h3>
+                        <span class="data teacher-name">Anas pir</span>
+                    </div>
+                    <div class="data-container">
+                        <span class="data designation">Lecturer</span>
+                    </div>
+                    <div class="data-container">
+                        <span>Dept. of <span class="data teacher-dept">CSE</span></span>
+                    </div>
+                    <span>Metropolitan University, Sylhet</span>
+                </section>
+
+                <section class="submitted-by">
+                    <div class="data-container">
+                        <h3 class="bold">Submitted by</h3>
+                        <span class="data student-name">Tahzib Ebad Chowdhury</span>
+                    </div>
+                    <div class="data-container">
+                        <span><b>Student ID:</b> <span class="data id">151-115-084</span></span>
+                    </div>
+                    <div class="data-container">
+                        <span><b>Batch:</b> <span class="data batch">CSE 62</span></span>
+                    </div>
+                    <div class="data-container">
+                        <span><b>Section:</b> <span class="data section">B</span></span>
+                    </div>
+                </section>
+
+                <section class="footer">
+                    <div class="data-container">
+                        <span>Dept. of <span class="data student-dept">Computer Science & Engineering</span></span>
+                    </div>
+                    <span>Metropolitan University, Sylhet</span>
+                    <div class="data-container">
+                        <span><b>Submission date: </b> <span class="data submission-date">01/02/2026</span></span>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
