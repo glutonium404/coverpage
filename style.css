@@ -135,6 +135,7 @@ body {
 .coverpage.printing {
     box-shadow: none !important;
     margin: 0 !important;
+    transform: none !important;
 }
 
 .coverpage img {
