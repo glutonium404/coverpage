@@ -65,31 +65,4 @@ generateBtn.addEventListener("click", async () => {
 //         btn.innerText = "Generate PDF";
 //         btn.disabled = false;
 //     }
-// });        console.error(err);
-        window.alert("Sorry, something went wrong :'(");
-    } finally {
-        coverpage.classList.remove("printing");
-    }
-});
-
-// generateBtn.addEventListener('click', async () => {
-//     generateBtn.textContent = 'Generating...';
-//     generateBtn.disabled = true;
-//
-//     try {
-//         const pdfBlob = await html2pdf()
-//             .set(options)
-//             .from(coverpage)
-//             .output('blob');
-//
-//         const url = URL.createObjectURL(pdfBlob);
-//         window.open(url, '_blank');
-//         setTimeout(() => URL.revokeObjectURL(url), 30000);
-//     } catch (e) {
-//         alert('PDF generation failed. Please try again.');
-//         console.error(e);
-//     } finally {
-//         btn.innerText = "Generate PDF";
-//         btn.disabled = false;
-//     }
 // });
