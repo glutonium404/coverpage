@@ -20,28 +20,24 @@ const options = {
     pagebreak: { mode: 'avoid-all' }
 };
 
+const waitForPaint = () =>
+    new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
 generateBtn.addEventListener("click", async () => {
     coverpage.classList.add("printing");
 
     try {
+        await waitForPaint();
+
         await html2pdf()
             .set(options)
             .from(coverpage)
             .save();
-
-        // const pdfBlob = await html2pdf()
-        //     .set(options)
-        //     .from(coverpage)
-        //     .output('blob');
-        //
-        //
-        // const pdfUrl = URL.createObjectURL(pdfBlob);
-        // window.open(pdfUrl, '_blank');
-        //
-        coverpage.classList.remove("printing");
     } catch (err) {
         console.error(err);
         window.alert("Sorry, something went wrong :'(");
+    } finally {
+        coverpage.classList.remove("printing");
     }
 });
 
