@@ -20,21 +20,52 @@ const options = {
     pagebreak: { mode: 'avoid-all' }
 };
 
-const waitForPaint = () =>
-    new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-
 generateBtn.addEventListener("click", async () => {
     coverpage.classList.add("printing");
 
     try {
-        await waitForPaint();
-
         await html2pdf()
             .set(options)
             .from(coverpage)
             .save();
+
+        // const pdfBlob = await html2pdf()
+        //     .set(options)
+        //     .from(coverpage)
+        //     .output('blob');
+        //
+        //
+        // const pdfUrl = URL.createObjectURL(pdfBlob);
+        // window.open(pdfUrl, '_blank');
+        //
+        coverpage.classList.remove("printing");
     } catch (err) {
         console.error(err);
+        window.alert("Sorry, something went wrong :'(");
+    }
+});
+
+// generateBtn.addEventListener('click', async () => {
+//     generateBtn.textContent = 'Generating...';
+//     generateBtn.disabled = true;
+//
+//     try {
+//         const pdfBlob = await html2pdf()
+//             .set(options)
+//             .from(coverpage)
+//             .output('blob');
+//
+//         const url = URL.createObjectURL(pdfBlob);
+//         window.open(url, '_blank');
+//         setTimeout(() => URL.revokeObjectURL(url), 30000);
+//     } catch (e) {
+//         alert('PDF generation failed. Please try again.');
+//         console.error(e);
+//     } finally {
+//         btn.innerText = "Generate PDF";
+//         btn.disabled = false;
+//     }
+// });        console.error(err);
         window.alert("Sorry, something went wrong :'(");
     } finally {
         coverpage.classList.remove("printing");
