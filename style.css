@@ -30,6 +30,12 @@ body {
     overflow: hidden;
 }
 
+input::placeholder {
+    color: #fff;
+    opacity: 0.4;
+    font-style: italic;
+}
+
 .app-layout {
     display: flex;
     height: 100%;

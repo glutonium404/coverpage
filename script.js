@@ -2,26 +2,27 @@ const inputs = document.querySelectorAll(".sidebar input");
 const coverpage = document.querySelector(".coverpage");
 const generateBtn = document.querySelector(".generate");
 const data = {
-    assignmentTitle: "Class Work 2",
-    assignmentNumber: "02",
-    courseTitle: "ADA",
-    courseCode: "CSE-232",
-    teacherName: "Anas pir",
-    designation: "Lecturer",
-    teacherDept: "CSE",
-    studentName: "Tahzib Ebad Chowdhury",
-    studentId: "251-115-084",
-    batch: "CSE 62",
-    section: "B",
-    studentDept: "Computer Science & Engineering",
-    date: "01/02/2026"
+    assignmentTitle: "",
+    assignmentNumber: "",
+    courseTitle: "",
+    courseCode: "",
+    teacherName: "",
+    designation: "",
+    teacherDept: "",
+    studentName: "",
+    studentId: "",
+    batch: "",
+    section: "",
+    studentDept: "",
+    date: getDate()
 };
 
 inputs.forEach(input => {
     if (input.name === "submission-date") {
-        const date = new Date();
-        const formatted = date.toLocaleDateString('en-GB');
-        input.value = formatted;
+        input.value = data.date;
+        const el = coverpage.querySelector(`.${input.name}`);
+        if (el) el.innerText = input.value;
+
     }
     input.addEventListener("input", () => {
         const el = coverpage.querySelector(`.${input.name}`);
@@ -120,6 +121,7 @@ async function generateCoverPage() {
         compress: true
     });
 
+    const fontScalar = 1.1;
     const pageWidth = 210;
     const centerX = pageWidth / 2;
 
@@ -139,13 +141,13 @@ async function generateCoverPage() {
     }
 
     // assignment Title
-    doc.setFontSize(22);
+    doc.setFontSize(22 * fontScalar);
     doc.setFont("times", "bold");
     doc.text(data.assignmentTitle || '', centerX, 72, { align: 'center' });
 
     // assignment Number & Course Details
     let currentY = 88;
-    doc.setFontSize(13);
+    doc.setFontSize(13 * fontScalar);
 
     function drawKeyValue(boldLabel, normalVal, y) {
         doc.setFont("times", "bold");
@@ -171,11 +173,11 @@ async function generateCoverPage() {
     // submitted To Section
     currentY = 138;
     doc.setFont("times", "bold");
-    doc.setFontSize(14);
+    doc.setFontSize(14 * fontScalar);
     doc.text("Submitted to", centerX, currentY, { align: 'center' });
 
     doc.setFont("times", "normal");
-    doc.setFontSize(12);
+    doc.setFontSize(12 * fontScalar);
     doc.text(data.teacherName || '', centerX, currentY + 7, { align: 'center' });
     doc.text(data.designation || '', centerX, currentY + 13, { align: 'center' });
     doc.text(`Dept. of ${data.teacherDept || data.department || ''}`, centerX, currentY + 19, { align: 'center' });
@@ -184,11 +186,11 @@ async function generateCoverPage() {
     // submitted By Section
     currentY = 195;
     doc.setFont("times", "bold");
-    doc.setFontSize(14);
+    doc.setFontSize(14 * fontScalar);
     doc.text("Submitted by", centerX, currentY, { align: 'center' });
 
     doc.setFont("times", "normal");
-    doc.setFontSize(12);
+    doc.setFontSize(12 * fontScalar);
     doc.text(data.studentName || '', centerX, currentY + 7, { align: 'center' });
 
     drawKeyValue("Student ID: ", data.studentId || '', currentY + 14);
@@ -198,7 +200,7 @@ async function generateCoverPage() {
     // footer Details (Department, University, Submission Date)
     currentY = 250;
     doc.setFont("times", "normal");
-    doc.setFontSize(12);
+    doc.setFontSize(12 * fontScalar);
     doc.text(`Dept. of ${data.studentDept || data.department || ''}`, centerX, currentY, { align: 'center' });
     doc.text("Metropolitan University, Sylhet", centerX, currentY + 6, { align: 'center' });
 
@@ -220,4 +222,9 @@ function download(blobUrl) {
 
 function getFileName() {
     return `coverpage [${data.courseTitle}] [${data.studentName}] [${data.studentId}].pdf`
+}
+
+function getDate() {
+    const date = new Date();
+    return date.toLocaleDateString('en-GB');
 }
