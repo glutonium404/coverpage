@@ -39,9 +39,51 @@ async function fetchDeptFac() {
     }
 }
 
-fetchDeptFac().then(() => {
+function loadSavedStudentInfo() {
+    const savedInfo = localStorage.getItem("student-info");
+    if (!savedInfo) return;
+
+    try {
+        const studentInfo = JSON.parse(savedInfo);
+
+        const fieldMapping = {
+            studentName: "student-name",
+            studentId: "id",
+            batch: "batch",
+            section: "section",
+            studentDept: "student-dept"
+        };
+
+        Object.keys(studentInfo).forEach(key => {
+            const value = studentInfo[key];
+            if (!value) return;
+
+            const inputName = fieldMapping[key] || key;
+            const inputEl = document.querySelector(`input[name="${inputName}"]`);
+
+            if (inputEl) {
+                inputEl.value = value;
+            }
+
+            updateData(inputName, value);
+
+            const previewEl = coverpage.querySelector(`.${inputName}`);
+            if (previewEl) {
+                previewEl.innerText = value;
+            }
+        });
+    } catch (e) {
+        console.error("Failed to parse student info from localStorage:", e);
+    }
+}
+
+async function init() {
+    loadSavedStudentInfo();
+    await fetchDeptFac();
     facInfoSearchBtn.disabled = false;
-})
+}
+
+init();
 
 function renderFacultyList(list) {
     searchResultList.innerHTML = "";
@@ -146,6 +188,14 @@ function generate() {
     generateBtn.textContent = "Generating...";
     generateBtn.disabled = true;
     coverpage.classList.add("printing");
+
+    localStorage.setItem("student-info", JSON.stringify({
+        studentName: data.studentName,
+        studentId: data.studentId,
+        batch: data.batch,
+        section: data.section,
+        studentDept: data.studentDept,
+    }));
 
     setTimeout(() => {
         generateCoverPage();
