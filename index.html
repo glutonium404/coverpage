@@ -9,12 +9,82 @@
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap"
         rel="stylesheet">
+    <script src="https://kit.fontawesome.com/dd5aff85b8.js" crossorigin="anonymous"></script>
     <script src="asset/script/jspdf.umd.min.js" type="module" defer></script>
     <script src="./asset/script/html2canvas.min.js" type="module" defer></script>
     <script src="script.js" type="module" defer></script>
 </head>
 
 <body>
+    <dialog class="search-window">
+        <button id="close">
+            <i class="fa-solid fa-x"></i>
+        </button>
+        <input type="text" id="search-faculty">
+        <ul class="search-result">
+            <li>
+                <span class="name">faculty name</span>
+                <span class="designation">lecturer</span>
+            </li>
+            <li>
+                <span class="name">faculty name</span>
+                <span class="designation">lecturer</span>
+            </li>
+            <li>
+                <span class="name">faculty name</span>
+                <span class="designation">lecturer</span>
+            </li>
+            <li>
+                <span class="name">faculty name</span>
+                <span class="designation">lecturer</span>
+            </li>
+            <li>
+                <span class="name">faculty name</span>
+                <span class="designation">lecturer</span>
+            </li>
+            <li>
+                <span class="name">faculty name</span>
+                <span class="designation">lecturer</span>
+            </li>
+            <li>
+                <span class="name">faculty name</span>
+                <span class="designation">lecturer</span>
+            </li>
+            <li>
+                <span class="name">faculty name</span>
+                <span class="designation">lecturer</span>
+            </li>
+            <li>
+                <span class="name">faculty name</span>
+                <span class="designation">lecturer</span>
+            </li>
+            <li>
+                <span class="name">faculty name</span>
+                <span class="designation">lecturer</span>
+            </li>
+            <li>
+                <span class="name">faculty name</span>
+                <span class="designation">lecturer</span>
+            </li>
+            <li>
+                <span class="name">faculty name</span>
+                <span class="designation">lecturer</span>
+            </li>
+            <li>
+                <span class="name">faculty name</span>
+                <span class="designation">lecturer</span>
+            </li>
+            <li>
+                <span class="name">faculty name</span>
+                <span class="designation">lecturer</span>
+            </li>
+            <li>
+                <span class="name">faculty name</span>
+                <span class="designation">lecturer</span>
+            </li>
+        </ul>
+    </dialog>
+
     <div class="app-layout">
 
         <aside class="sidebar">
@@ -41,7 +111,12 @@
             </div>
 
             <div class="form-section">
-                <h3>Teacher Info</h3>
+                <div class="teacher-info-header">
+                    <h3>Teacher Info</h3>
+                    <button disabled>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
                 <div class="input-group">
                     <label>Teacher Name</label>
                     <input name="teacher-name" type="text" placeholder="Anas pir">
