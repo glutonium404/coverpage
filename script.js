@@ -1,6 +1,7 @@
 const inputs = document.querySelectorAll(".sidebar input");
 const coverpage = document.querySelector(".coverpage");
-const generateBtn = document.querySelector(".generate");
+const generatePdf = document.querySelector(".generatePdf");
+const generateImg = document.querySelector(".generateImg");
 const facInfoSearchBtn = document.querySelector(".teacher-info-header button");
 const searchWin = document.querySelector(".search-window");
 const searchInput = document.querySelector("#search-faculty");
@@ -181,12 +182,36 @@ inputs.forEach(input => {
     });
 });
 
-generateBtn.addEventListener("click", generate);
+generatePdf.addEventListener("click", generate);
+generateImg.addEventListener("click", generate)
 
-function generate() {
-    const originalTxtContent = generateBtn.textContent;
-    generateBtn.textContent = "Generating...";
-    generateBtn.disabled = true;
+async function imageGenerator() {
+    try {
+        const canvas = await html2canvas(coverpage, {
+            allowTaint: true,
+            useCORS: true,
+        })
+
+        let image = canvas.toDataURL("image/png", 1.0);
+        let downloadLink = document.createElement("a");
+        downloadLink.href = image;
+        downloadLink.download = getFileName("png");
+
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    }
+    catch (e) {
+        console.log("Error capturing image:", e);
+    }
+}
+
+function generate(e) {
+    const originalTxtContent = e.target.textContent;
+    const btnType = e.target.dataset.type;
+    console.log(btnType)
+    e.target.textContent = "Generating...";
+    e.target.disabled = true;
     coverpage.classList.add("printing");
 
     localStorage.setItem("student-info", JSON.stringify({
@@ -198,9 +223,11 @@ function generate() {
     }));
 
     setTimeout(() => {
-        generateCoverPage();
-        generateBtn.textContent = originalTxtContent;
-        generateBtn.disabled = false;
+        if(btnType == "pdf") { pdfGenerator() }
+        else if(btnType == "img"){ imageGenerator() }
+
+        e.target.textContent = originalTxtContent;
+        e.target.disabled = false;
         coverpage.classList.remove("printing");
     }, 300);
 }
@@ -240,7 +267,7 @@ function loadImageAsBase64(url) {
     });
 }
 
-async function generateCoverPage() {
+async function pdfGenerator() {
     const { jsPDF } = window.jspdf;
 
     const doc = new jsPDF({
@@ -337,14 +364,14 @@ async function generateCoverPage() {
 function download(blobUrl) {
     const link = document.createElement('a');
     link.href = blobUrl;
-    link.download = getFileName();
+    link.download = getFileName("pdf");
     document.body.appendChild(link);
     link.click();
     link.remove();
 }
 
-function getFileName() {
-    return `coverpage [${data.courseTitle}] [${data.studentName}] [${data.studentId}].pdf`;
+function getFileName(extension) {
+    return `coverpage [${data.courseTitle}] [${data.studentName}] [${data.studentId}].${extension}`;
 }
 
 function getDate() {
