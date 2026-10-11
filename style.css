@@ -314,6 +314,12 @@ input::placeholder {
     padding: 0;
 }
 
+.warning {
+    font-size: 0.85em;
+    font-style: italic;
+    color: #ff9900 ;
+}
+
 @media (max-width: 900px) {
     .app-layout {
         flex-direction: column;
